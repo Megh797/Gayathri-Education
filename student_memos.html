@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Class Notices{% endblock %}
+
+{% block content %}
+<a class="btn btn-secondary btn-sm mb-3" href="{{ url_for('student_portal') }}">
+  <i class="bi bi-arrow-left"></i> Go Back
+</a>
+
+<h4 class="text-light mb-3">📢 Class Notices</h4>
+
+{% if memos %}
+  <div class="list-group">
+    {% for m in memos %}
+      <div class="list-group-item shadow-sm mb-2">
+        <div class="small text-light">{{ m.created_on }}</div>
+        <div>{{ m.message }}</div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="card p-3 text-center text-light">No notices available</div>
+{% endif %}
+{% endblock %}

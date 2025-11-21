@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Admin Login | Gayathri Vidyalaya{% endblock %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center" style="min-height:80vh; padding-top:60px;">
+  <div class="card shadow-lg p-4" style="max-width:420px; width:100%; border-radius:14px;">
+    <div class="text-center mb-3">
+      <img src="{{ url_for('logo') }}" alt="logo" width="72" class="mb-2">
+      <h4 class="fw-bold text-primary">Admin Login</h4>
+      <p class="text-muted small">Enter admin username & password</p>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} py-2">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input name="username" type="text" class="form-control" required placeholder="admin">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input name="password" type="password" class="form-control" required placeholder="••••••••">
+      </div>
+      <div class="d-grid">
+        <button class="btn btn-primary">Sign in</button>
+      </div>
+    </form>
+
+    <div class="text-center mt-3">
+      <a href="{{ url_for('home') }}" class="small text-decoration-none">← Back to Portal</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

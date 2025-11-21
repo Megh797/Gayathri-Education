@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Teacher Dashboard — GV{% endblock %}
+{% block content %}
+
+<a class="btn btn-secondary btn-sm mb-3" href="{{ url_for('home') }}">
+  <i class="bi bi-arrow-left"></i> Go Back
+</a>
+
+<h3 class="fw-bold mb-4" style="color:#f8f9fa; text-shadow:1px 1px 3px rgba(0,0,0,0.5);">
+  👩‍🏫 Welcome, {{ session.get('teacher_name') }}
+</h3>
+
+<div class="row g-4">
+
+  <!-- Homework Card -->
+  <div class="col-md-4">
+    <div class="card card-hover-5d shadow p-4 border-0 text-center" style="background: linear-gradient(135deg, #f7971e, #ffd200); border-radius: 20px;">
+      <h5 class="mb-2" style="color:#e0e0e0;">Homework</h5>
+      <h2 class="fw-bold text-light glow"><i class="bi bi-journal-text"></i></h2>
+      <a href="{{ url_for('teacher_homework') }}" class="btn btn-outline-light btn-sm mt-2">Manage Homework</a>
+    </div>
+  </div>
+
+  <!-- Attendance Card -->
+  <div class="col-md-4">
+    <div class="card card-hover-5d shadow p-4 border-0 text-center" style="background: linear-gradient(135deg, #11998e, #38ef7d); border-radius: 20px;">
+      <h5 class="mb-2" style="color:#e0e0e0;">Attendance</h5>
+      <h2 class="fw-bold text-light glow"><i class="bi bi-calendar-check"></i></h2>
+      <a href="{{ url_for('teacher_attendance') }}" class="btn btn-outline-light btn-sm mt-2">Mark Attendance</a>
+    </div>
+  </div>
+
+  <!-- Logout Card -->
+  <div class="col-md-4">
+    <div class="card card-hover-5d shadow p-4 border-0 text-center" style="background: linear-gradient(135deg, #ff4e50, #f9d423); border-radius: 20px;">
+      <h5 class="mb-2" style="color:#e0e0e0;">Logout</h5>
+      <h2 class="fw-bold text-light glow"><i class="bi bi-door-open-fill"></i></h2>
+      <a href="{{ url_for('logout') }}" class="btn btn-outline-light btn-sm mt-2">Logout</a>
+    </div>
+  </div>
+
+</div>
+
+<style>
+/* 5D card hover */
+.card-hover-5d {
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.card-hover-5d:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.4);
+}
+
+/* Glowing icons */
+.glow {
+    text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
+}
+</style>
+
+{% endblock %}

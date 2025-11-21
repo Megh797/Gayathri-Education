@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %}Attendance — Admin{% endblock %}
+{% block content %}
+
+<a class="btn btn-secondary btn-sm mb-3" href="{{ url_for('admin_dashboard') }}">
+<i class="bi bi-arrow-left"></i> Back
+</a>
+
+<h3 class="fw-bold text-primary mb-3">Class Attendance</h3>
+
+<!-- Select Class -->
+<form method="get" class="mb-3">
+  <select name="class_id" class="form-select w-50 d-inline-block" required>
+    <option value="">Select Class</option>
+    {% for c in classes %}
+      <option value="{{ c.id }}" {% if class_id == c.id|string %}selected{% endif %}>
+        {{ c.name }}
+      </option>
+    {% endfor %}
+  </select>
+  <button class="btn btn-primary">Go</button>
+</form>
+
+{% if class_id %}
+<hr>
+
+<!-- ✅ Add student -->
+<form method="post" class="row g-2 mb-3">
+  <input type="hidden" name="action" value="add_student">
+  <div class="col-md-4">
+    <input class="form-control" name="student_name" placeholder="Student Name" required>
+  </div>
+  <div class="col-md-4">
+    <input class="form-control" name="parent_contact" placeholder="Parent Phone">
+  </div>
+  <div class="col-md-4">
+    <button class="btn btn-success w-100">Add Student</button>
+  </div>
+</form>
+
+<!-- ✅ Attendance -->
+<form method="post">
+<input type="hidden" name="action" value="submit_attendance">
+
+<div class="mb-3">
+  <label class="fw-bold">Select Date:</label>
+  <input type="date" name="date" class="form-control w-25" value="{{ today }}">
+</div>
+
+<table class="table table-bordered bg-white">
+  <thead class="table-primary">
+    <tr>
+      <th>Student Name</th>
+      <th>Present</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for s in students %}
+    <tr>
+      <td>{{ s.name }}</td>
+      <td><input type="checkbox" name="att_{{ s.id }}"></td>
+
+      <!-- delete button -->
+      <td>
+        <form method="post" onsubmit="return confirm('Delete this student?')">
+          <input type="hidden" name="action" value="delete_student">
+          <input type="hidden" name="student_id" value="{{ s.id }}">
+          <button class="btn btn-sm btn-danger">
+           <i class="bi bi-trash"></i>
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<button class="btn btn-primary mt-2">Save Attendance</button>
+</form>
+
+<hr>
+
+<!-- ✅ Saved Attendance Records -->
+{% if attendance_records %}
+<h4 class="fw-bold text-success mt-4">Saved Attendance ({{ today }})</h4>
+
+<table class="table table-bordered bg-white">
+  <thead class="table-info">
+    <tr>
+      <th>Student</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in attendance_records %}
+    <tr>
+      <td>{{ r.name }}</td>
+      <td>
+        {% if r.status == 'Present' %}
+        <span class="badge bg-success">Present</span>
+        {% else %}
+        <span class="badge bg-danger">Absent</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+<hr>
+
+<!-- ✅ Attendance Percentage -->
+{% if attendance_percentages %}
+<h4 class="fw-bold text-primary mt-4">Attendance Percentage</h4>
+
+<table class="table table-striped bg-white shadow-sm">
+<thead class="table-dark">
+<tr>
+  <th>Student</th>
+  <th>Attendance %</th>
+</tr>
+</thead>
+<tbody>
+{% for a in attendance_percentages %}
+<tr>
+  <td>{{ a.name }}</td>
+  <td>
+    {% if a.attendance_percent >= 75 %}
+      <span class="badge bg-success">{{ a.attendance_percent }}%</span>
+    {% elif a.attendance_percent >= 40 %}
+      <span class="badge bg-warning">{{ a.attendance_percent }}%</span>
+    {% else %}
+      <span class="badge bg-danger">{{ a.attendance_percent }}%</span>
+    {% endif %}
+  </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+
+{% endif %}
+{% endblock %}

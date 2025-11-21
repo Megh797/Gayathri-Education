@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Select Class{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-4">
+    <h2 class="fw-bold">Select Your Class</h2>
+    <p class="text-light">Click your class to view homework & announcements</p>
+  </div>
+
+  <div class="row justify-content-center g-3">
+    {% for c in classes %}
+    <div class="col-6 col-md-4 col-lg-3">
+      <a href="{{ url_for('student_class_dashboard', class_id=c.id) }}" class="text-decoration-none">
+        <div class="card p-4 shadow-5d text-center hover-card" style="border-radius:18px;">
+          <div style="font-size:28px; font-weight:700;">{{ c.name }}</div>
+          <div class="small text-light mt-2">Homework • Notices</div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{{ url_for('home') }}" class="btn btn-outline-secondary btn-sm">← Back to Home</a>
+  </div>
+</div>
+
+<style>
+/* 5D card shadow + hover */
+.shadow-5d {
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.12),
+    0 10px 20px rgba(0,0,0,0.12),
+    0 20px 40px rgba(0,0,0,0.06);
+  background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color: #fff;
+  background-color: #1f2937;
+}
+.hover-card { transition: transform .18s ease, box-shadow .18s ease; }
+.hover-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.35); }
+@media (max-width:576px){ .col-6 { width:50%; } }
+</style>
+{% endblock %}

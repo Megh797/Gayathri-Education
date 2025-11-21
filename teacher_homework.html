@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Teacher Homework{% endblock %}
+{% block content %}
+
+<a class="btn btn-secondary btn-sm mb-3" href="{{ url_for('teacher_home') }}">
+  <i class="bi bi-arrow-left"></i> Back
+</a>
+
+<h3 class="fw-bold text-primary mb-3">Homework Management</h3>
+
+<div class="card shadow-sm mb-4 p-3">
+  <h5 class="mb-2">Add Homework</h5>
+
+  <form method="POST" enctype="multipart/form-data">
+    <div class="row g-2 mb-2">
+      <div class="col-md-3">
+        <select name="class_id" class="form-select" required>
+          <option value="">Select Class</option>
+          {% for c in classes %}
+            <option value="{{ c.id }}">{{ c.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <input class="form-control" name="title" placeholder="Title" required>
+      </div>
+
+      <div class="col-md-4">
+        <input class="form-control" name="description" placeholder="Description">
+      </div>
+
+      <div class="col-md-2">
+        <input type="date" class="form-control" name="due_date">
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <input type="file" class="form-control" name="file">
+    </div>
+
+    <button class="btn btn-primary">Upload Homework</button>
+  </form>
+</div>
+
+<table class="table table-bordered shadow-sm">
+  <thead class="table-light">
+    <tr>
+      <th>Class</th>
+      <th>Title</th>
+      <th>Due</th>
+      <th>File</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for h in homework %}
+      <tr>
+        <td>{{ h.class_name }}</td>
+        <td>{{ h.title }}</td>
+        <td>{{ h.due_date or 'N/A' }}</td>
+        <td>
+          {% if h.file_path %}
+            <a href="{{ url_for('static', filename=h.file_path.split('static/')[1]) }}" target="_blank">Download</a>
+          {% else %}
+            -
+          {% endif %}
+        </td>
+        <td>
+          <form method="POST" action="{{ url_for('delete_homework', hw_id=h.id) }}" onsubmit="return confirm('Are you sure?');">
+            <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Manage Students — Admin{% endblock %}
+
+{% block content %}
+
+<!-- Go Back -->
+<a class="btn btn-secondary btn-sm mb-3" href="{{ url_for('admin_dashboard') }}">
+  <i class="bi bi-arrow-left"></i> Back
+</a>
+
+<h3 class="fw-bold text-primary mb-4">Manage Students</h3>
+
+<!-- Select Class Filter -->
+<form method="get" class="row g-2 mb-4">
+  <div class="col-md-3">
+    <select name="class" class="form-select" required>
+      <option value="" disabled selected>Select Class</option>
+      {% for c in classes %}
+      <option value="{{ c }}" {% if selected_class == c %}selected{% endif %}>Class {{ c }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-primary w-100">Filter</button>
+  </div>
+</form>
+
+<!-- Add Student -->
+<div class="card shadow-sm mb-4 p-4">
+  <h5 class="fw-bold text-success mb-3">Add Student</h5>
+  
+  <form method="post" action="{{ url_for('admin_manage_students') }}">
+    <input type="hidden" name="action" value="add">
+
+    <div class="row g-3">
+      <div class="col-md-4">
+        <input type="text" name="student_name" class="form-control" placeholder="Student Name" required>
+      </div>
+      
+      <div class="col-md-3">
+        <select name="class_name" class="form-select" required>
+          <option value="" disabled selected>Select Class</option>
+          {% for c in classes %}
+          <option value="{{ c }}">Class {{ c }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <input type="text" name="parent_name" class="form-control" placeholder="Parent Name" required>
+      </div>
+
+      <div class="col-md-1 d-grid">
+        <button class="btn btn-success"><i class="bi bi-plus-lg"></i></button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Students Table -->
+<div class="card shadow-sm p-4">
+  <h5 class="fw-bold mb-3 text-primary">Students — Class {{ selected_class }}</h5>
+
+  <table class="table table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Name</th>
+        <th>Parent</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if students %}
+        {% for s in students %}
+        <tr>
+          <td>{{ s.student_name }}</td>
+          <td>{{ s.parent_name }}</td>
+          <td>
+            <form method="post" style="display:inline;" action="{{ url_for('admin_manage_students') }}">
+              <input type="hidden" name="action" value="delete">
+              <input type="hidden" name="student_id" value="{{ s.id }}">
+              <button class="btn btn-danger btn-sm">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      {% else %}
+      <tr>
+        <td colspan="3" class="text-center text-muted py-3">No students in this class.</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

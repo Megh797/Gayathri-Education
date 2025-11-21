@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Mark Attendance</h3>
+<form method="post">
+  <div class="row mb-2">
+    <div class="col-md-3">
+      <select class="form-select" name="class_id">
+        {% for c in classes %}<option value="{{c.id}}">{{c.name}}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="col-md-3"><input type="date" name="date" class="form-control"></div>
+  </div>
+  <table class="table table-sm table-bordered">
+    <thead><tr><th>Student</th><th>Present</th></tr></thead>
+    <tbody>
+      {% for s in students %}
+      <tr><td>{{s.name}}</td><td><input type="checkbox" name="present_{{s.id}}"></td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button class="btn btn-primary">Save Attendance</button>
+</form>
+{% endblock %}

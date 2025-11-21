@@ -1,0 +1,10 @@
+body, html { height: 100%; margin: 0; }
+#wrapper { display: flex; min-height: 100vh; transition: all 0.3s ease; }
+#sidebar-wrapper { width: 250px; min-height: 100vh; transition: all 0.3s; }
+#page-content-wrapper { flex: 1; }
+#wrapper.toggled #sidebar-wrapper { margin-left: -250px; }
+.list-group-item:hover { background-color: #0d6efd !important; opacity: 0.85; }
+@media (max-width: 768px) {
+  #sidebar-wrapper { margin-left: -250px; }
+  #wrapper.toggled #sidebar-wrapper { margin-left: 0; }
+}

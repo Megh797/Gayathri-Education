@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Post Homework</h3>
+<form method="post" class="row g-2 mb-3">
+  <div class="col-md-2">
+    <select class="form-select" name="class_id">
+      {% for c in classes %}<option value="{{c.id}}">{{c.name}}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3"><input class="form-control" name="title" placeholder="Title"></div>
+  <div class="col-md-4"><input class="form-control" name="description" placeholder="Description"></div>
+  <div class="col-md-2"><input class="form-control" type="date" name="due_date"></div>
+  <div class="col-md-1"><button class="btn btn-success">Post</button></div>
+</form>
+<table class="table table-sm">
+  <thead><tr><th>Class</th><th>Title</th><th>Description</th><th>Posted</th></tr></thead>
+  <tbody>
+    {% for h in homework %}
+    <tr><td>{{h.class_name}}</td><td>{{h.title}}</td><td>{{h.description}}</td><td>{{h.posted_on}}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

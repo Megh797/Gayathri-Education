@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}Gayathri Vidyalaya — Portal{% endblock %}
+
+{% block content %}
+
+<style>
+  /* Hero Section */
+  .hero-section {
+    height: 60vh;
+    background: radial-gradient(circle at top, rgba(238, 240, 242, 0.25), rgba(0,0,0,0.75)),
+                url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f') center/cover no-repeat;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    animation: fadeIn 1.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Cards */
+  .about-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    transition: 0.35s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .about-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+  }
+
+  .about-card i {
+    text-shadow: 0 0 12px rgba(255,255,255,0.2);
+  }
+
+  /* Headings */
+  #portal h3 {
+    text-shadow: 0 0 10px rgba(240, 242, 244, 0.25);
+  }
+
+  /* Buttons */
+  .btn-portal {
+    border: 1px solid #5B9EFF;
+    color: #5B9EFF;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+  .btn-portal:hover {
+    box-shadow: 0 0 12px #5B9EFF;
+    transform: translateY(-3px);
+    color: white;
+  }
+
+  .text-muted {
+    color: rgba(255,255,255,0.6) !important;
+  }
+
+</style>
+
+<!-- Hero Section -->
+<div class="hero-section d-flex align-items-center justify-content-center">
+  <div class="text-center">
+    <h1 class="display-5 fw-bold" style="text-shadow:0 0 12px rgba(255,255,255,0.3)">Gayathri Vidyalaya</h1>
+    <p class="lead mb-4 text-muted">A caring school for academic excellence, character & creativity.</p>
+    <a href="{{ url_for('about') }}" class="btn btn-portal btn-lg text-dark">About Us</a>
+  </div>
+</div>
+
+<!-- School Portals -->
+<div class="container py-5" id="portal">
+  <h3 class="text-center text-primary fw-bold mb-4">School Portal</h3>
+
+  <div class="row g-4 justify-content-center">
+
+    <!-- Admin Portal -->
+    <div class="col-sm-8 col-md-4">
+      <a href="{{ url_for('login') }}" class="text-decoration-none">
+        <div class="card about-card p-4 text-center h-100">
+          <i class="bi bi-shield-lock-fill fs-1 text-primary mb-3"></i>
+         <h5 class="fw-bold text-light">Admin Portal</h5>
+          <p class="text-muted small">Manage students, fees, attendance, homework & memos.</p>
+          <span class="badge bg-primary mt-3">Secure</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Teacher Portal -->
+    <div class="col-sm-8 col-md-4">
+      <a href="{{ url_for('teacher_login') }}" class="text-decoration-none">
+        <div class="card about-card p-4 text-center h-100">
+          <i class="bi bi-person-badge-fill fs-1 text-success mb-3"></i>
+          <h5 class="fw-bold text-light">Teacher Portal</h5>
+          <p class="text-muted small">Post homework, mark attendance & send memos.</p>
+          <span class="badge bg-success mt-3">Teachers</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Student Portal -->
+    <div class="col-sm-8 col-md-4">
+      <a href="{{ url_for('student_portal') }}" class="text-decoration-none">
+        <div class="card about-card p-4 text-center h-100">
+          <i class="bi bi-mortarboard-fill fs-1 text-warning mb-3"></i>
+          <h5 class="fw-bold text-light">Student Portal</h5>
+          <p class="text-muted small">View homework, attendance, timetable & school notices.</p>
+          <span class="badge bg-warning text-dark mt-3">Student</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="text-center mt-5">
+    <small class="text-muted">Need help? Contact the school office or your class teacher.</small>
+  </div>
+</div>
+
+{% endblock %}

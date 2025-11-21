@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}SMS Logs — Admin{% endblock %}
+
+{% block content %}
+
+<a class="btn btn-secondary btn-sm mb-3" href="{{ url_for('admin_dashboard') }}">
+  <i class="bi bi-arrow-left"></i> Back
+</a>
+
+<h3 class="fw-bold text-light mb-3">SMS Logs</h3>
+
+<table class="table table-hover bg-white shadow-sm">
+  <thead class="table-dark">
+    <tr>
+      <th>Date</th>
+      <th>To Number</th>
+      <th>Purpose</th>
+      <th>Message</th>
+      <th>Status</th>
+      <th>Error</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% if logs %}
+    {% for log in logs %}
+    <tr>
+      <td>{{ log.created_on }}</td>
+      <td>{{ log.to_number }}</td>
+      <td>{{ log.purpose }}</td>
+      <td>{{ log.content }}</td>
+
+      <td>
+        {% if log.status == 'sent' %}
+          <span class="badge bg-success">Sent</span>
+        {% elif log.status == 'failed' %}
+          <span class="badge bg-danger">Failed</span>
+        {% else %}
+          <span class="badge bg-warning">Queued</span>
+        {% endif %}
+      </td>
+
+      <td>{{ log.error or '-' }}</td>
+    </tr>
+    {% endfor %}
+  {% else %}
+    <tr><td colspan="6" class="text-center text-light">No SMS logs found.</td></tr>
+  {% endif %}
+  </tbody>
+</table>
+
+{% endblock %}

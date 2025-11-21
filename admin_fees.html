@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Fees — Admin{% endblock %}
+
+{% block content %}
+<a class="btn btn-secondary btn-sm mb-3" href="{{ url_for('admin_dashboard') }}">
+  <i class="bi bi-arrow-left"></i> Back
+</a>
+
+<h3 class="fw-bold text-primary mb-3">Manage Fees</h3>
+
+<table class="table table-hover bg-white shadow-sm">
+  <thead class="table-dark">
+    <tr>
+      <th>Student</th>
+      <th>Class</th>
+      <th>Total Fee</th>
+      <th>Paid</th>
+      <th>Balance</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for s in students %}
+    <tr>
+      <form method="POST">
+        <td>{{ s.name }}</td>
+        <td>{{ s.class_name }}</td>
+
+        <td>
+          <input type="number" class="form-control form-control-sm"
+                 name="total" value="{{ s.total_amount or 0 }}" min="0" required>
+        </td>
+
+        <td>
+          <input type="number" class="form-control form-control-sm"
+                 name="paid" value="{{ s.paid_amount or 0 }}" min="0" required>
+        </td>
+
+        <td>
+          <span class="badge 
+            {% if (s.balance or 0) > 0 %}
+              bg-danger
+            {% else %}
+              bg-success
+            {% endif %}
+          ">
+            ₹{{ s.balance or 0 }}
+          </span>
+        </td>
+
+        <td>
+          <input type="hidden" name="student_id" value="{{ s.id }}">
+          <button class="btn btn-success btn-sm">Save</button>
+        </td>
+      </form>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

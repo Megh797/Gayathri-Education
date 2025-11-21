@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Student Login{% endblock %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center" style="min-height:78vh; padding-top:60px;">
+  <div class="card shadow p-4" style="max-width:420px; border-radius:25px;">
+
+    <div class="text-center mb-3">
+      <h4 class="fw-bold">Student Portal</h4>
+      <p class="text-muted">Enter your name and select class</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('student_redirect') }}">
+      <div class="mb-3">
+        <label class="form-label">Student Name</label>
+        <input name="student_name" type="text" class="form-control" placeholder="Enter your name" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Class</label>
+        <select name="class_id" class="form-select" required>
+          <option value="" disabled selected>Select Class</option>
+          {% for cl in classes %}
+          <option value="{{ cl.id }}">{{ cl.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-warning">Continue →</button>
+      </div>
+    </form>
+
+    <div class="text-center mt-3">
+      <a href="{{ url_for('home') }}" class="small">← Back to Home</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

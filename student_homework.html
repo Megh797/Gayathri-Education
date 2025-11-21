@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Homework — {{ class_info.name }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h3 class="fw-bold">Homework — {{ class_info.name }}</h3>
+    </div>
+    <div>
+      <a href="{{ url_for('student_class_dashboard', class_id=class_info.id) }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+    </div>
+  </div>
+
+  {% if homework %}
+  <div class="list-group">
+    {% for h in homework %}
+    <div class="list-group-item d-flex justify-content-between align-items-start">
+      <div>
+        <div class="fw-bold">{{ h.title }}</div>
+        <div class="small text-light">{{ h.description }}</div>
+        <div class="small text-light">Due: {{ h.due_date or 'N/A' }}</div>
+      </div>
+      <div class="text-end">
+        {% if h.file_path %}
+          {% set fp = (h.file_path.split('static/',1)[-1] if 'static/' in (h.file_path or '') else h.file_path) %}
+          <a href="{{ url_for('static', filename=fp) }}" class="btn btn-sm btn-outline-primary" target="_blank">Download</a>
+        {% endif %}
+        <div class="small text-muted mt-1">{{ h.posted_on }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="card p-3 text-light">No homework for this class.</div>
+  {% endif %}
+</div>
+{% endblock %}

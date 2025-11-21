@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Select Student{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Select Your Name</h2>
+        <p class="text-muted">Click your name to access your student dashboard</p>
+    </div>
+
+    <div class="row justify-content-center">
+        {% for s in students %}
+        <div class="col-md-4 mb-3">
+            <a href="{{ url_for('student_dashboard', student_name=s.name, class_id=class_id) }}" class="text-decoration-none">
+                <div class="card shadow-sm p-3 text-center hover-card" style="border-radius: 15px;">
+                    <h5 class="fw-bold text-success">{{ s.name }}</h5>
+                    <p class="text-muted mb-0">View your homework, attendance & notices</p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('student_portal') }}" class="btn btn-outline-secondary btn-sm">← Back to Classes</a>
+    </div>
+
+</div>
+
+<style>
+.hover-card {
+    transition: all 0.3s ease-in-out;
+}
+.hover-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+</style>
+{% endblock %}

@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block title %}About Us | Gayathri Vidyalaya{% endblock %}
+
+{% block content %}
+<style>
+.hero-about {
+    background: linear-gradient(90deg, rgba(30,82,163,0.9), rgba(76,175,80,0.85)),
+                url('/static/images/school-banner.jpg') center/cover no-repeat;
+    color: white;
+    padding: 120px 0;
+}
+.card-hover {
+    transition: 0.3s ease-in-out;
+}
+.card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.19);
+}
+.icon-round {
+    width: 60px;
+    height: 60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+}
+</style>
+
+<!-- Hero Section -->
+<div class="hero-about text-center">
+    <h1 class="fw-bold display-4">About Gayathri Vidyalaya</h1>
+    <p class="lead mt-3">Shaping bright futures with knowledge, discipline & innovation</p>
+</div>
+
+<div class="container py-5">
+
+    <!-- Mission & Vision - 5D Style -->
+<div class="row text-center mb-5">
+    <div class="col-md-6 mb-4">
+        <div class="card p-4 border-0 card-hover-5d" style="background: linear-gradient(135deg, #6a11cb, #2575fc); border-radius: 20px;">
+            <div class="icon-round-5d mx-auto mb-3">
+                <i class="bi bi-bullseye fs-2 text-warning glow"></i>
+            </div>
+            <h4 class="fw-bold" style="color:#fff; text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">Our Mission</h4>
+            <p class="mt-2" style="color:#e0e0e0;">
+                To empower students with academic excellence, strong character, and modern skills 
+                to thrive as leaders in a rapidly evolving world.
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card p-4 border-0 card-hover-5d" style="background: linear-gradient(135deg, #11998e, #38ef7d); border-radius: 20px;">
+            <div class="icon-round-5d mx-auto mb-3">
+                <i class="bi bi-eye-fill fs-2 text-light glow"></i>
+            </div>
+            <h4 class="fw-bold" style="color:#fff; text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">Our Vision</h4>
+            <p class="mt-2" style="color:#e0e0e0;">
+                To nurture confident, responsible, and creative individuals who contribute 
+                positively to society while upholding cultural and moral values.
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Card hover lift with soft shadow */
+.card-hover-5d {
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.card-hover-5d:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+}
+
+/* Circular icon with glow */
+.icon-round-5d {
+    width: 70px;
+    height: 70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.glow {
+    text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
+}
+</style>
+
+    <!-- Values - 5D Style -->
+<h3 class="fw-bold text-center mb-5" style="color:#f8f9fa; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Core Values</h3>
+
+<div class="row mb-5">
+    <div class="col-md-3 text-center mb-4">
+        <div class="card p-4 border-0 card-hover-5d" style="background: linear-gradient(135deg, #6a11cb, #2575fc); border-radius: 20px;">
+            <div class="icon-round-5d mx-auto mb-3">
+                <i class="bi bi-lightbulb-fill fs-2 text-warning glow"></i>
+            </div>
+            <h5 style="color:#fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Innovation</h5>
+            <p class="small" style="color:#e0e0e0;">Creative learning environment to encourage ideas.</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 text-center mb-4">
+        <div class="card p-4 border-0 card-hover-5d" style="background: linear-gradient(135deg, #11998e, #38ef7d); border-radius: 20px;">
+            <div class="icon-round-5d mx-auto mb-3">
+                <i class="bi bi-people-fill fs-2 text-light glow"></i>
+            </div>
+            <h5 style="color:#fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Integrity</h5>
+            <p class="small" style="color:#e0e0e0;">Values & discipline guiding brighter character.</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 text-center mb-4">
+        <div class="card p-4 border-0 card-hover-5d" style="background: linear-gradient(135deg, #fc5c7d, #6a82fb); border-radius: 20px;">
+            <div class="icon-round-5d mx-auto mb-3">
+                <i class="bi bi-heart-fill fs-2 text-danger glow"></i>
+            </div>
+            <h5 style="color:#fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Compassion</h5>
+            <p class="small" style="color:#e0e0e0;">Respect, kindness & empathy towards all.</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 text-center mb-4">
+        <div class="card p-4 border-0 card-hover-5d" style="background: linear-gradient(135deg, #f7971e, #ffd200); border-radius: 20px;">
+            <div class="icon-round-5d mx-auto mb-3">
+                <i class="bi bi-award-fill fs-2 text-light glow"></i>
+            </div>
+            <h5 style="color:#fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Excellence</h5>
+            <p class="small" style="color:#e0e0e0;">Commitment to top-tier education & results.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Card hover lift with soft shadow */
+.card-hover-5d {
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.card-hover-5d:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+}
+
+/* Circular icon with glow */
+.icon-round-5d {
+    width: 70px;
+    height: 70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.glow {
+    text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
+}
+</style>
+
+    <!-- Facilities -->
+    <h3 class="fw-bold text-center text-success mb-4">Campus Facilities</h3>
+    <ul class="list-group mb-5 shadow-sm">
+        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> Smart Classrooms</li>
+        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> Well-equipped Computer & Science Labs</li>
+        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> Library & Digital Learning Center</li>
+        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> Sports & Cultural Activities</li>
+        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> CCTV & Child Safety Systems</li>
+    </ul>
+
+    <!-- CTA -->
+    <div class="text-center mt-5">
+        <a href="{{ url_for('login') }}" class="btn btn-lg btn-primary px-5 shadow">
+            <i class="bi bi-box-arrow-in-right"></i> Explore Our School Portal
+        </a>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Teacher Login | Gayathri Vidyalaya{% endblock %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center" style="min-height:78vh; padding-top:60px;">
+  <div class="card shadow p-4" style="max-width:420px;">
+    <div class="text-center mb-3">
+      <img src="{{ url_for('logo') }}" width="68" class="mb-2">
+      <h4 class="fw-bold text-primary">Teacher Login</h4>
+      <p class="text-muted small">Use your teacher username</p>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} py-2">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('teacher_login') }}">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input name="username" type="text" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input name="password" type="password" class="form-control" required>
+      </div>
+      <div class="d-grid">
+        <button class="btn btn-success">Login as Teacher</button>
+      </div>
+    </form>
+
+    <div class="text-center mt-3">
+      <a href="{{ url_for('home') }}" class="small">← Back to Home</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

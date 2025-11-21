@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard — Gayathri Vidyalaya{% endblock %}
+
+{% block content %}
+
+<a class="btn btn-secondary btn-sm mb-3" href="{{ url_for('home') }}">
+  <i class="bi bi-arrow-left"></i> Go Back
+</a>
+
+<h2 class="fw-bold mb-4" style="color:#f8f9fa; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Admin Dashboard</h2>
+
+<div class="row g-4">
+
+  <!-- Total Students -->
+  <div class="col-md-4">
+    <div class="card card-hover-5d p-4 border-0" style="background: linear-gradient(135deg, #6a11cb, #2575fc); border-radius: 20px;">
+      <h5 class="mb-1" style="color:#e0e0e0;">Total Students</h5>
+      <h2 class="fw-bold" style="color:#fff;">{{ total_students }}</h2>
+      <p class="small" style="color:#dee2e6;">Manage student list</p>
+      <a href="{{ url_for('admin_students') }}" class="btn btn-outline-light btn-sm">Manage Students</a>
+    </div>
+  </div>
+
+  <!-- Homework -->
+  <div class="col-md-4">
+    <div class="card card-hover-5d p-4 border-0" style="background: linear-gradient(135deg, #f7971e, #ffd200); border-radius: 20px;">
+      <h5 class="mb-1" style="color:#e0e0e0;">Homework</h5>
+      <h2 class="fw-bold" style="color:#fff;">{{ recent_homework }}</h2>
+      <p class="small" style="color:#dee2e6;">Post homework class-wise</p>
+      <a href="{{ url_for('admin_homework') }}" class="btn btn-outline-light btn-sm">Manage Homework</a>
+    </div>
+  </div>
+
+  <!-- Attendance -->
+  <div class="col-md-4">
+    <div class="card card-hover-5d p-4 border-0" style="background: linear-gradient(135deg, #11998e, #38ef7d); border-radius: 20px;">
+      <h5 class="mb-1" style="color:#e0e0e0;">Today's Attendance</h5>
+      <h2 class="fw-bold" style="color:#fff;">{{ total_attendance_today }}</h2>
+      <p class="small" style="color:#dee2e6;">Mark/view attendance</p>
+      <a href="{{ url_for('admin_attendance') }}" class="btn btn-outline-light btn-sm">Attendance</a>
+    </div>
+  </div>
+
+  <!-- Announcements -->
+  <div class="col-md-4">
+    <div class="card card-hover-5d p-4 border-0" style="background: linear-gradient(135deg, #6a82fb, #fc5c7d); border-radius: 20px;">
+      <h5 class="mb-1" style="color:#e0e0e0;">Announcements</h5>
+      <h2 class="fw-bold" style="color:#fff;"><i class="bi bi-megaphone glow"></i></h2>
+      <p class="small" style="color:#dee2e6;">Send school/class announcements</p>
+      <a href="{{ url_for('admin_memos') }}" class="btn btn-outline-light btn-sm">Manage Announcements</a>
+    </div>
+  </div>
+
+  <!-- Fees Pending -->
+  <div class="col-md-4">
+    <div class="card card-hover-5d p-4 border-0" style="background: linear-gradient(135deg, #ff4e50, #f9d423); border-radius: 20px;">
+      <h5 class="mb-1" style="color:#e0e0e0;">Pending Fees</h5>
+      <h2 class="fw-bold" style="color:#fff;">{{ pending_fees_count }}</h2>
+      <p class="small" style="color:#dee2e6;">Students with outstanding balance</p>
+      <a href="{{ url_for('admin_fees') }}" class="btn btn-outline-light btn-sm">Manage Fees</a>
+    </div>
+  </div>
+
+</div>
+
+<hr class="my-4 border-light">
+
+<h5 class="fw-bold mb-3" style="color:#f8f9fa; text-shadow:1px 1px 3px rgba(0,0,0,0.5);">Recently Added Students</h5>
+
+<table class="table table-hover bg-dark shadow-sm text-light">
+  <thead style="background: rgba(255,255,255,0.1);">
+    <tr>
+      <th>Name</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if latest_students %}
+      {% for s in latest_students %}
+      <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.class_name }}</td>
+      </tr>
+      {% endfor %}
+    {% else %}
+      <tr><td colspan="3" class="text-center text-muted py-3">No students yet.</td></tr>
+    {% endif %}
+  </tbody>
+</table>
+
+<style>
+/* 5D card hover */
+.card-hover-5d {
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.card-hover-5d:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.4);
+}
+
+/* Glowing icons */
+.glow {
+    text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
+}
+
+/* Table 3D effect */
+.table-hover tbody tr:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateX(5px);
+    transition: 0.3s ease;
+}
+</style>
+
+{% endblock %}

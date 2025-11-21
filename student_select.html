@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Student Portal | Gayathri Vidyalaya{% endblock %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center" style="min-height:78vh; padding-top:60px;">
+
+  <div class="card card-hover-5d shadow p-4 animate-gradient" style="max-width:420px; border-radius:25px; color:#f8f9fa; overflow:hidden;">
+
+    <!-- Logo & Heading -->
+    <div class="text-center mb-3">
+      <img src="{{ url_for('logo') }}" width="68" class="mb-2 glow">
+      <h4 class="fw-bold glow" style="text-shadow:1px 1px 5px rgba(0,0,0,0.5);">Student Portal</h4>
+      <p class="small" style="color:#e0e0e0;">Enter your name and select your class</p>
+    </div>
+
+    <!-- Form -->
+    <form method="POST" action="{{ url_for('student_redirect') }}">
+
+      <div class="mb-3">
+        <label class="form-label glow">Student Name</label>
+        <input name="student_name" type="text" class="form-control" placeholder="Enter your name" required style="border-radius:10px;">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label glow">Class</label>
+        <select name="class_id" class="form-select" required style="border-radius:10px;">
+          <option value="" disabled selected>Select Class</option>
+          {% for cl in classes %}
+            <option value="{{ cl.id }}">{{ cl.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-warning glow text-dark">Continue →</button>
+      </div>
+
+    </form>
+
+    <!-- Back Link -->
+    <div class="text-center mt-3">
+      <a href="{{ url_for('home') }}" class="small glow">← Back to Home</a>
+    </div>
+
+  </div>
+</div>
+
+<style>
+/* 5D card hover effect */
+.card-hover-5d {
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.card-hover-5d:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+}
+
+/* Glowing text */
+.glow {
+    text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
+}
+
+/* Animated gradient background */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+    background: linear-gradient(135deg, #6a11cb, #2575fc, #ff4e50, #f9d423);
+    background-size: 400% 400%;
+    animation: gradientAnimation 12s ease infinite;
+}
+</style>
+{% endblock %}
