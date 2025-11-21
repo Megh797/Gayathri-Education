@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: gayathri-education
+    env: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 4
+databases:
+  - name: gayathri-education-db
+    engine: postgresql
+    plan: starter
